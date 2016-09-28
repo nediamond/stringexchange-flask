@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, request, redirect, url_for
 from random import choice
 import MySQLdb
 
+#TODO: implement config file
 
 app = Flask(__name__)
 app.secret_key = "flippyfloppy"
@@ -37,6 +38,8 @@ def decision():
 
     return redirect(url_for('prompt'))
 
+
+#TODO: move this to another file
 class DAL:
     def __init__(self):
         self.db = MySQLdb.connect(
