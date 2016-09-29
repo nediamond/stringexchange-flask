@@ -1,0 +1,10 @@
+create database stringexchange_flask;
+use stringexchange_flask;
+
+create table shared_strings (
+id int not null auto_increment primary key,
+string varchar(140));
+
+create table shared_strings_ro (
+id int not null auto_increment primary key,
+string varchar(140));

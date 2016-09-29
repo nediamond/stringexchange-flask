@@ -1,10 +1,10 @@
 from flask import Flask, render_template, session, request, redirect, url_for
-from random import choice
-import MySQLdb
-
+from DAL import DAL
 #TODO: implement config file
 
 app = Flask(__name__)
+
+# Arbitrary secret key to use Flask.session
 app.secret_key = "flippyfloppy"
 
 @app.route('/')
@@ -37,36 +37,3 @@ def decision():
           dal.remove_entry(result_id)
 
     return redirect(url_for('prompt'))
-
-
-#TODO: move this to another file
-class DAL:
-    def __init__(self):
-        self.db = MySQLdb.connect(
-            host='nediamond.mysql.pythonanywhere-services.com',
-            user='nediamond',
-            passwd='cheezits',
-            db='nediamond$default',
-            )
-
-    def get_random_entry(self):
-        cursor = self.db.cursor()
-        cursor.execute('SELECT * FROM shared_strings')
-        result = cursor.fetchall()
-        return choice(result)
-
-    def add_entry(self, entry):
-        cursor = self.db.cursor()
-        # Plz no injection thanks
-        cursor.execute('INSERT INTO shared_strings (string) VALUES (%s)',(entry,))
-        cursor.execute('INSERT INTO shared_strings_ro (string) VALUES (%s)',(entry,))
-        self.db.commit()
-        return
-
-    def remove_entry(self, id):
-        cursor = self.db.cursor()
-        cursor.execute('DELETE FROM shared_strings WHERE id='+str(id))
-        self.db.commit()
-        return
-
-
