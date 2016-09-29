@@ -1,6 +1,5 @@
 from flask import Flask, render_template, session, request, redirect, url_for
 from DAL import DAL
-#TODO: implement config file
 
 app = Flask(__name__)
 
