@@ -11,6 +11,8 @@ It accepts string submissions at the root url, then directs the user to /display
 
 (cd /.../stringexchange-flask)
 
+Put MySQL information into config.py
+
 export FLASK_APP=flask_app.py (Windows: set FLASK_APP=flask_app.py)
 
 flask run
